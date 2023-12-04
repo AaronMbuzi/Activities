@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="new.css">
+    <title>Document</title>
+</head>
+<body>
+    <p><h1>Are you Board And Looking for something to do ?</h1></p>
+    <u></u>
+    <h2>Push the Generate button and get a task</h2>
+    <div id="data"></div>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var url = "https://www.boredapi.com/api/activity";
+        xhr.open("GET", url);
+        xhr.responseType = "json";
+        xhr.onload = function() {
+        if (xhr.status == 200) {
+            var data = xhr.response;
+            var div = document.createElement("div");
+            var h1 = document.createElement("h1");
+            h1.textContent = "Activity: " + data.activity;
+            var pType = document.createElement("p");
+            pType.textContent = "Type: " + data.type;
+            var pParticipants = document.createElement("p");
+            pParticipants.textContent = "Participants: " + data.participants;
+            div.appendChild(h1);
+            div.appendChild(pType);
+            div.appendChild(pParticipants);
+            document.body.appendChild(div);
+        } else {
+            console.error("An error occurred: " + xhr.status);
+        }
+        };
+        xhr.send()
+    </script>
+    <script>
+        var button = document.createElement("button");
+        button.textContent = "Generate";
+        button.onclick = function() {
+        location.reload();
+        };
+        document.body.appendChild(button);
+            </script>
+</body>
+</html>
